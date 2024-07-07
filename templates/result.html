@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Diabetes Prediction Result</h1>
+        <h2>{{ result }}</h2>
+        <b>Accuracy: {{ confidence | round(2) * 100 }}%</b>
+        <h3>User Data</h3>
+        <ul>
+            {% for key, value in user_data.items() %}
+                <li>{{ key }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+        <h3>Precautions</h3>
+        <ul>
+            {% for item in precautions %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+        <h3> Medical Advice</h3>
+        <ul>
+            {% for item in advice %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+        {% if specific_advice %}
+            <h3>Specific Advice</h3>
+            <ul>
+                {% for item in specific_advice %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, Male!</h1>
+        <h1>DIABETES PREDICTION</h1>
+        <form method="POST">
+            <label for="glucose"><h4>Glucose:</h4></label>
+            <input type="number" id="glucose" name="glucose" min="0" max="200" required>
+            
+            <label for="bp"><h4>Blood Pressure:</h4></label>
+            <input type="number" id="bp" name="bp" min="0" max="140" required>
+            
+            <label for="skinthickness"><h4>Skin Thickness:</h4></label>
+            <input type="number" id="skinthickness" name="skinthickness" min="0" max="100" required>
+            
+            <label for="insulin"><h4>Insulin:</h4></label>
+            <input type="number" id="insulin" name="insulin" min="0" max="846" required>
+            
+            <label for="bmi"><h4>BMI:</h4></label>
+            <input type="number" step="0.1" id="bmi" name="bmi" min="0" max="67" required>
+            
+            <label for="dpf"><h4>Pedigree Function:</h4></label>
+            <input type="number" step="0.01" id="dpf" name="dpf"  min="0" max="2.4" required>
+            
+            <label for="age"><h4>Age:</h4></label>
+            <input type="number" id="age" name="age" min="21" max="95" required>
+            
+            <button type="submit">Predict</button>
+        </form>
+        <a href="/graphs">View visualized patient report</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome,Female!</h1>
+        <h1>DIABETES PREDICTION</h1>
+        <form method="POST">
+            <label for="pregnancies"><h4>Pregnancies:</h4></label>
+            <input type="number" id="pregnancies" name="pregnancies" min="0" max="17" required>
+            
+            <label for="glucose"><h4>Glucose:</h4></label>
+            <input type="number" id="glucose" name="glucose" min="0" max="200" required>
+            
+            <label for="bp"><h4>Blood Pressure:</h4></label>
+            <input type="number" id="bp" name="bp" min="0" max="140" required>
+            
+            <label for="skinthickness"><h4>Skin Thickness:</h4></label>
+            <input type="number" id="skinthickness" name="skinthickness" min="0" max="100" required>
+            
+            <label for="insulin"><h4>Insulin:</h4></label>
+            <input type="number" id="insulin" name="insulin" min="0" max="846" required>
+            
+            <label for="bmi"><h4>BMI:</h4></label>
+            <input type="number" step="0.1" id="bmi" name="bmi" min="0" max="67" required>
+            
+            <label for="dpf"><h4>Pedigree Function:</h4></label>
+            <input type="number" step="0.01" id="dpf" name="dpf"  min="0" max="2.4" required>
+            
+            <label for="age"><h4>Age:</h4></label>
+            <input type="number" id="age" name="age" min="21" max="95" required>
+            
+           
+            <button type="button" onclick="startDictation()">Start Voice Input</button>
+            <button type="submit">Predict</button>
+        </form>
+        <a href="/graphs">View visualized patient report</a>
+    </div>
+    <script>
+        function startDictation() {
+            if (window.hasOwnProperty('webkitSpeechRecognition')) {
+                var recognition = new webkitSpeechRecognition();
+
+                recognition.continuous = false;
+                recognition.interimResults = false;
+
+                recognition.lang = "en-US";
+                recognition.start();
+
+                recognition.onresult = function(e) {
+                    var transcript = e.results[0][0].transcript;
+                    var fields = transcript.split(' ');
+
+                    if (fields.length === 8) {
+                        document.getElementById('pregnancies').value = fields[0];
+                        document.getElementById('glucose').value = fields[1];
+                        document.getElementById('bp').value = fields[2];
+                        document.getElementById('skinthickness').value = fields[3];
+                        document.getElementById('insulin').value = fields[4];
+                        document.getElementById('bmi').value = fields[5];
+                        document.getElementById('dpf').value = fields[6];
+                        document.getElementById('age').value = fields[7];
+                    } else {
+                        alert("Please speak all 8 fields separated by spaces.");
+                    }
+
+                    recognition.stop();
+                };
+
+                recognition.onerror = function(e) {
+                    recognition.stop();
+                }
+            } else {
+                alert("Speech recognition is not supported in this browser.");
+            }
+        }
+    </script>
+</body>
+</html>

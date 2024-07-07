@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gender Selection</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+</head>
+<body>
+    <script type="text/javascript">
+        functiom Form(){
+            var selectvalue=$('input[name=link]:checked','#Form').val();
+            if(selectvalue=="male"){
+                window.open('male.html','_self')
+                return true;
+            }
+            else if(selectvalue=="female"){
+                window.open('female.html','_self')
+                return true;
+            }
+        return false;
+        };
+    </script>
+<center>
+    <div class="container">
+        <form id="genderForm" action="/" method="get">
+            <h1>Select Your Gender</h1>
+            <label for="male">
+                <input type="radio" id="male" onclick="Form()" name="gender" value="male">
+                Male
+            </label>
+            <label for="female">
+                <input type="radio" id="female" onclick="Form()" name="gender" value="female">
+                Female
+            </label>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</center>
+</body>
+</html>
